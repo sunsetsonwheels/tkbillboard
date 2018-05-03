@@ -14,8 +14,8 @@ print("Logging you into Spotify...")
 print("")
 print("===================================================================")
 username = input("Your Spotify[R] username: ")
-print("")
 print("===================================================================")
+print("")
 print("Logging in...")
 token_read = util.prompt_for_user_token(username, scope_read, client_id="fd0faa7123584102b5893a4639ff7288", client_secret="347e543d63a94921b2455a26f0320481", redirect_uri="https://billpy.weebly.com")
 spotify = spotipy.Spotify(auth=token_read)
@@ -28,7 +28,7 @@ def refreshBillboard():
 
 def searchSpotify(songName, searchParam, searchLimit):
     results = spotify.search(q=songName, limit=searchLimit, type=searchParam)
-    pprint.pprint(results)
+    print(results)
     #print("No errors, but I'm still working on printing this output!")
 
 def getTopSong():
