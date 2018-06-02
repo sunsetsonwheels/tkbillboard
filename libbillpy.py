@@ -28,7 +28,7 @@ def refreshBillboard():
 
 def searchSpotify(songName, searchParam, searchLimit):
     results = spotify.search(q=songName, limit=searchLimit, type=searchParam)
-    print(results)
+    pprint(results)
     #print("No errors, but I'm still working on printing this output!")
 
 def getTopSong():
@@ -48,5 +48,10 @@ def getMoreTopSongs():
     print("2>"+"'"+topSong2.title+"'"+" by "+topSong2.artist)
     print("3>"+"'"+topSong3.title+"'"+" by "+topSong3.artist)
     print("4>"+"'"+topSong4.title+"'"+" by "+topSong4.artist)
-    print("5>"+"'"+topSong5.title+"'"+" by "+topSong5.artist)  
-getTopSong()
+    print("5>"+"'"+topSong5.title+"'"+" by "+topSong5.artist)
+    searchSpotify(topSong1.title, "track", 1)
+    searchSpotify(topSong2.title, "track", 1)
+    searchSpotify(topSong3.title, "track", 1)
+    searchSpotify(topSong4.title, "track", 1)
+    searchSpotify(topSong5.title, "track", 1)
+getMoreTopSongs()
