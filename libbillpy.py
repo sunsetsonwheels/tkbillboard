@@ -55,3 +55,4 @@ def getMoreTopSongs():
     searchSpotify(topSong4.title, "track", 1)
     searchSpotify(topSong5.title, "track", 1)
 getMoreTopSongs()
+
