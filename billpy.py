@@ -1,4 +1,6 @@
-from tkinter import *
+from tkinter import Label
+from tkinter import Button
+from tkinter import Tk
 from tkinter import messagebox
 import billboard
 
