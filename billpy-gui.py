@@ -1,19 +1,18 @@
 from tkinter import *
 from tkinter import messagebox
 import billboard
-
-network_avil = int(0)
         
 print("Start refreshing charts.")
 try:
     print("Checking for network.")
     chart = billboard.ChartData("hot-100")
     print("Done checking for network.")
-    network_avil = int(1)
+    print("Done refreshing charts.")
+    app()
 except:
     messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
     print("Done checking for network.")
-print("Done refreshing charts.")
+    print("Exitting application because of 'No network' exception.")
 
 def app():
     
@@ -58,8 +57,4 @@ def app():
 
     billpy_window.mainloop()
     print("Exitting application.")
- 
-if network_avil == 1:
-    app()
-elif network_avil == 0:
-    print("Exitting application because of 'No network' exception.")
+    
