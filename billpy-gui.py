@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
 import billboard
-        
+
 def app():
-    
+        
     print("Start listing songs.")
     topSong1 = chart[0]
     topSong2 = chart[1]
@@ -16,8 +16,10 @@ def app():
         messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py and (not implimented yet) spotipy. This is a demo GUI version based on Tkinter.")
 
     def refresh():
-        billpy_window.destroy()
-        app()
+        import os
+        import sys
+        sys.stdout.flush()
+        os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
 
     billpy_window = Tk()
     billpy_window.title("billpy GUI")
@@ -37,7 +39,7 @@ def app():
     topSong5_label = Label(billpy_window, text=topSong5, font=("Segoe UI", 14))
     topSong5_label.pack()
 
-    refresh_button = Button(billpy_window, text="Refresh charts (not working yet)", font=("Segoe UI Bold", 10), command=refresh)
+    refresh_button = Button(billpy_window, text="Refresh charts", font=("Segoe UI Bold", 10), command=refresh)
     refresh_button.pack()
 
     about_button = Button(billpy_window, text="About", font=("Segoe UI Bold", 10), command=about)
@@ -52,7 +54,11 @@ try:
     chart = billboard.ChartData("hot-100")
     print("Done checking for network.")
     print("Done refreshing charts.")
-    app()
+    try:
+        app()
+    except:
+        messagebox.showerror("Bug reporter", "The application is facing an unknown error. Please re-download this application or contact the developer at https://github.com/jkelol111/billpy/issues.")
+        print("Exitting application because of unknown exception.")
 except:
     messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
     print("Done checking for network.")
