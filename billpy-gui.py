@@ -2,18 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 import billboard
         
-print("Start refreshing charts.")
-try:
-    print("Checking for network.")
-    chart = billboard.ChartData("hot-100")
-    print("Done checking for network.")
-    print("Done refreshing charts.")
-    app()
-except:
-    messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
-    print("Done checking for network.")
-    print("Exitting application because of 'No network' exception.")
-
 def app():
     
     print("Start listing songs.")
@@ -57,4 +45,15 @@ def app():
 
     billpy_window.mainloop()
     print("Exitting application.")
-    
+
+print("Start refreshing charts.")
+try:
+    print("Checking for network.")
+    chart = billboard.ChartData("hot-100")
+    print("Done checking for network.")
+    print("Done refreshing charts.")
+    app()
+except:
+    messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
+    print("Done checking for network.")
+    print("Exitting application because of 'No network' exception.")
