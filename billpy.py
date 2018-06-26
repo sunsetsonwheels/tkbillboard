@@ -1,6 +1,3 @@
-from tkinter import Label
-from tkinter import Button
-from tkinter import Tk
 from tkinter import messagebox
 import billboard
 
@@ -15,13 +12,17 @@ def app():
     print("Done listing songs.")
 
     def about():
-        messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py and (not implimented yet) spotipy. This is a demo GUI version based on Tkinter.")
+        messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py. This is a demo GUI version based on Tkinter.")
 
     def refresh():
         import os
         import sys
         sys.stdout.flush()
         os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
+    
+    from tkinter import Label
+    from tkinter import Button
+    from tkinter import Tk
 
     billpy_window = Tk()
     billpy_window.title("billpy GUI")
