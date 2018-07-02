@@ -24,7 +24,11 @@ def app():
         messagebox.showinfo("Have you got 'git' installed", "Updating/Reinstalling billpy relies on a program called git. If you have not got it installed, close this window.")
         import git
         import os
-        print("Update/Reinstall commence progress.")
+        import shutil
+        print("Update/Reinstall running.")
+        print("[1/2] Deleting previous version of application.")
+        shutil.rmtree(os.path.dirname(os.path.realpath(__file__)))
+        print("[2/2] Deleting previous version of application.")
         git.Git(os.path.dirname(os.path.realpath(__file__))).clone("https://github.com/jkelol111/billpy.git")
         print("Update/Reinstall completed.")
         refresh()
