@@ -1,6 +1,11 @@
 from tkinter import messagebox
 import billboard
 
+def logDump(ex):
+    log = open('log.txt','w')
+    log.write(ex)
+    log.close()
+
 def app():
         
     print("Start listing songs.")
@@ -34,9 +39,11 @@ def app():
             print("[2/2] Downloading and installing new version of application")
             os.mkdir(app_path)
             git.Git(app_path).clone("https://github.com/jkelol111/billpy.git")
+            os.rmdir()
             print("Update/Reinstall completed.")
             refresh()
-        except:
+        except Exception as e:
+            logDump(e)
             messagebox.showerror("Bug reporter", "The application is facing an updating error. Please re-download this application or contact the developer at https://github.com/jkelol111/billpy/issues.")
             print("Exitting application because of 'Update Failed' exception.")
             exit()
@@ -85,7 +92,7 @@ try:
         app()
     except:
         messagebox.showerror("Bug reporter", "The application is facing an unknown error. Please re-download this application or contact the developer at https://github.com/jkelol111/billpy/issues.")
-        print("Exitting application because of 'unknown' exception.")
+        print("Exitting application because of 'App' exception.")
 except:
     messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
     print("Done checking for network.")
