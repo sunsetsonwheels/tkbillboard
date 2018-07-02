@@ -1,6 +1,5 @@
 # billpy
-A example wrapper for billboard.py and spotipy.
-
+An UI wrapper for billboard.py
 Run the app
 
 Method 1: Download the latest release.
