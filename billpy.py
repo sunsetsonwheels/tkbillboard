@@ -2,8 +2,9 @@ from tkinter import messagebox
 import billboard
 
 def logDump(ex):
+    dump = str(ex)
     log = open('log.txt','w')
-    log.write(ex)
+    log.write(dump)
     log.close()
 
 def app():
