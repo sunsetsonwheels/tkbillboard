@@ -20,6 +20,13 @@ def app():
         sys.stdout.flush()
         os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
     
+    def update():
+        messagebox.showinfo("Have you got 'git' installed", "Updating billpy relies on a program called git. If you have not got it installed, close this window.")
+        import git
+        print("Update commence progress.")
+        exit()
+        print("Update completed.")
+    
     from tkinter import Label
     from tkinter import Button
     from tkinter import Tk
@@ -47,6 +54,9 @@ def app():
 
     about_button = Button(billpy_window, text="About", font=("Segoe UI Bold", 10), command=about)
     about_button.pack()
+
+    update_button = Button(billpy_window, text="Update app", font=("Segoe UI Bold", 10), command=update)
+    update_button.pack()
 
     billpy_window.mainloop()
     print("Exitting application.")
