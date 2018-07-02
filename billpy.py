@@ -4,7 +4,7 @@ import billboard
 def logDump(ex):
     dump = str(ex)
     log = open('log.txt','w')
-    log.write("\n"+dump)
+    log.write(dump+"\n")
     log.close()
 
 def app():
