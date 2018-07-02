@@ -12,7 +12,7 @@ def app():
     print("Done listing songs.")
 
     def about():
-        messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py. This is a demo GUI version based on Tkinter.")
+        messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py. This is a demo GUI version based on Tkinter. v 1.0")
 
     def refresh():
         import os
@@ -21,11 +21,13 @@ def app():
         os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
     
     def update():
-        messagebox.showinfo("Have you got 'git' installed", "Updating billpy relies on a program called git. If you have not got it installed, close this window.")
+        messagebox.showinfo("Have you got 'git' installed", "Updating/Reinstalling billpy relies on a program called git. If you have not got it installed, close this window.")
         import git
-        print("Update commence progress.")
-        exit()
-        print("Update completed.")
+        import os
+        print("Update/Reinstall commence progress.")
+        git.Git(os.path.dirname(os.path.realpath(__file__))).clone("https://github.com/jkelol111/billpy.git")
+        print("Update/Reinstall completed.")
+        refresh()
     
     from tkinter import Label
     from tkinter import Button
@@ -55,7 +57,7 @@ def app():
     about_button = Button(billpy_window, text="About", font=("Segoe UI Bold", 10), command=about)
     about_button.pack()
 
-    update_button = Button(billpy_window, text="Update app", font=("Segoe UI Bold", 10), command=update)
+    update_button = Button(billpy_window, text="Update/Reinstall", font=("Segoe UI Bold", 10), command=update)
     update_button.pack()
 
     billpy_window.mainloop()
@@ -71,7 +73,7 @@ try:
         app()
     except:
         messagebox.showerror("Bug reporter", "The application is facing an unknown error. Please re-download this application or contact the developer at https://github.com/jkelol111/billpy/issues.")
-        print("Exitting application because of unknown exception.")
+        print("Exitting application because of 'unknown' exception.")
 except:
     messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
     print("Done checking for network.")
