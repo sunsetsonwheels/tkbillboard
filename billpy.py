@@ -25,14 +25,21 @@ def app():
         messagebox.showinfo("Have you got 'git' installed", "Updating/Reinstalling billpy relies on a program called git. If you have not got it installed, close this window.")
         import git
         import os
-        import shutil
-        print("Update/Reinstall running.")
-        print("[1/2] Deleting previous version of application.")
-        shutil.rmtree(os.path.dirname(os.path.realpath(__file__)))
-        print("[2/2] Deleting previous version of application.")
-        git.Git(os.path.dirname(os.path.realpath(__file__))).clone("https://github.com/jkelol111/billpy.git")
-        print("Update/Reinstall completed.")
-        refresh()
+        from shutil import rmtree
+        app_path = os.path.dirname(os.path.realpath(__file__))
+        try:
+            print("Update/Reinstall running.")
+            print("[1/2] Deleting previous version of application.")
+            rmtree(app_path)
+            print("[2/2] Downloading and installing new version of application")
+            os.mkdir(app_path)
+            git.Git(app_path).clone("https://github.com/jkelol111/billpy.git")
+            print("Update/Reinstall completed.")
+            refresh()
+        except:
+            messagebox.showerror("Bug reporter", "The application is facing an updating error. Please re-download this application or contact the developer at https://github.com/jkelol111/billpy/issues.")
+            print("Exitting application because of 'Update Failed' exception.")
+            exit()
     
     from tkinter import Label
     from tkinter import Button
