@@ -21,6 +21,7 @@ def app():
         os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
     
     def update():
+        messagebox.showwarning("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is!")
         messagebox.showinfo("Have you got 'git' installed", "Updating/Reinstalling billpy relies on a program called git. If you have not got it installed, close this window.")
         import git
         import os
