@@ -1,10 +1,10 @@
 # tkbillboard.py
-### An UI wrapper for billboard.py
+## An UI wrapper for billboard.py
 
-##### Run the app
+#### Run the app
 
 Clone this repo and run with: `python billpy.py`
 
-##### Report bugs
+#### Report bugs
 
 Use 'Issues' tab above.
