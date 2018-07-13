@@ -21,21 +21,29 @@ def app():
         messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py. This is a demo GUI version based on Tkinter. v 1.0")
 
     def refresh():
-        import os
         import sys
+        from os import execl
+        from sys import executable
+        from os.path import abspath
+        from sys import argv
         sys.stdout.flush()
-        os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
+        execl(executable, abspath(__file__), *argv) 
     
     def update():
-        messagebox.showwarning("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is!")
-        messagebox.showinfo("Have you got 'git' installed", "Updating/Reinstalling billpy relies on a program called git. If you have not got it installed, close this window.")
-        try:
-            import updater
-            updater.updateNow()
-        except Exception as e:
-            logDump(e)
-            messagebox.showerror("Update was unsuccesful! The app will now close! Error: "+e)
-        quit()
+        confirmUpdate = messagebox.askquestion("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is!", icon="warning")
+        if confirmUpdate == "yes": 
+            try:
+                import updater
+                updater.updateNow()
+            except Exception as e:
+                logDump(e)
+                exStr = str(e)
+                messagebox.showerror("Update was unsuccesful!", "The app will now close. Error: "+exStr)
+                exit()
+            messagebox.showinfo("Update was successful!", "The update process succeeded! Please click 'OK' to launch the new version.")
+            refresh()
+        elif confirmUpdate == "no":
+            messagebox.showinfo("Update was cancelled!", "The update process was denied.")
     
     from tkinter import Label
     from tkinter import Button
