@@ -3,6 +3,7 @@ import billboard
 
 def logDump(ex):
     dump = str(ex)
+    print(dump)
     log = open('log.txt','w')
     log.write(dump+"\n")
     log.close()
