@@ -1,4 +1,6 @@
 appName = str("tkbillboard.py")
 appRepo = str("https://github.com/jkelol111/tkbillboard.py.git")
 appDir = str("")
+appExecName = str("billpy.py")
 backupOn = bool(True)
+createLaunchScriptOn = bool(False)
