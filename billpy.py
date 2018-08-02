@@ -3,10 +3,11 @@ import billboard
 
 def logDump(ex):
     dump = str(ex)
-    print(dump)
+    print("Error has happened: "+dump)
     log = open('log.txt','w')
     log.write(dump+"\n")
     log.close()
+    messagebox.showerror("App Exception", "The app will now close. \nError: "+dump)
 
 def app():
         
@@ -31,15 +32,13 @@ def app():
         execl(executable, abspath(__file__), *argv) 
     
     def update():
-        confirmUpdate = messagebox.askquestion("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is!", icon="warning")
+        confirmUpdate = messagebox.askquestion("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is! If not, click No!", icon="warning")
         if confirmUpdate == "yes": 
             try:
                 import updater
                 updater.updateNow()
             except Exception as e:
                 logDump(e)
-                exStr = str(e)
-                messagebox.showerror("Update was unsuccesful!", "The app will now close. Error: "+exStr)
                 exit()
             messagebox.showinfo("Update was successful!", "The update process succeeded! Please click 'OK' to launch the new version.")
             refresh()
@@ -90,10 +89,8 @@ try:
         app()
     except Exception as e:
         logDump(e)
-        messagebox.showerror("Bug reporter", "The application is facing an unknown error. Please re-download this application or contact the developer at https://github.com/jkelol111/billpy/issues.")
         print("Exitting application because of 'App' exception.")
 except Exception as e:
     logDump(e)
-    messagebox.showerror("No network connectivity", "There isn't any internet connections at the moment. Please try again later.")
     print("Done checking for network.")
     print("Exitting application because of 'No network' exception.")
