@@ -36,6 +36,9 @@ def app():
         if confirmUpdate == "yes": 
             try:
                 import updater
+                from os.path import dirname
+                from os.path import realpath
+                updater.configureConfigNow("tkbillboard.py", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 updater.updateNow()
             except Exception as e:
                 logDump(e)
