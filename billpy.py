@@ -38,7 +38,7 @@ def app():
                 import updater
                 from os.path import dirname
                 from os.path import realpath
-                updater.configureConfigNow("tkbillboard.py", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
+                updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 updater.updateNow()
             except Exception as e:
                 logDump(e)

@@ -1,6 +1,7 @@
-appName = str("tkbillboard.py")
-appRepo = str("https://github.com/jkelol111/tkbillboard.py.git")
-appDir = str("")
-appExecName = str("billpy.py")
-backupOn = bool(True)
+#Read README.md to learn more about this configuration file!
+appIdentifier = str("com.sample.nothing")
+appRepo = str("http://www.example.com/project.git")
+appDir = str("Nothing")
+appExecName = str("Nothing.py")
+backupOn = bool(False)
 createLaunchScriptOn = bool(False)
