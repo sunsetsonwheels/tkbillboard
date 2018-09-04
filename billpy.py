@@ -49,7 +49,7 @@ def app():
             messagebox.showinfo("Update was cancelled!", "The update process was denied.")
     
     from tkinter import Label
-    from tkinter import Button
+    from tkinter.ttk import Button
     from tkinter import Tk
 
     billpy_window = Tk()
@@ -70,13 +70,13 @@ def app():
     topSong5_label = Label(billpy_window, text=topSong5, font=("Segoe UI", 14))
     topSong5_label.pack()
 
-    refresh_button = Button(billpy_window, text="Refresh charts", font=("Segoe UI Bold", 10), command=refresh)
+    refresh_button = Button(billpy_window, text="Refresh charts", command=refresh)
     refresh_button.pack()
 
-    about_button = Button(billpy_window, text="About", font=("Segoe UI Bold", 10), command=about)
+    about_button = Button(billpy_window, text="About", command=about)
     about_button.pack()
 
-    update_button = Button(billpy_window, text="Update/Reinstall", font=("Segoe UI Bold", 10), command=update)
+    update_button = Button(billpy_window, text="Update/Reinstall", command=update)
     update_button.pack()
 
     billpy_window.mainloop()
