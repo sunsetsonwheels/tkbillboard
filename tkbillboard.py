@@ -95,7 +95,7 @@ def app():
     spotify_button = Button(billpy_window, text="Add songs to Spotify[R] (not implimented)")
     spotify_button.pack()
 
-    customdate_button = Button(billpy_window, text="See chart on specific date", command=customDate)
+    customdate_button = Button(billpy_window, text="See chart on specific date (not implimented)")
     customdate_button.pack()
 
     about_button = Button(billpy_window, text="About", command=about)
