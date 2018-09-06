@@ -44,7 +44,7 @@ def app():
                 updateprogress_bar = Progressbar(updateprogressBox, orient="horizontal", length=200, mode="indeterminate")
                 updateprogress_label.pack()
                 updateprogress_bar.pack()
-                updateprogressBox.mainloop()
+                updateprogress_bar.start()
                 updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 exeupdate = Thread(target=updater.updateNow())
                 exeupdate.start()
