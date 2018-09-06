@@ -12,21 +12,20 @@ def logDump(ex):
 def app():
         
     print("Start listing songs.")
-    topSong1 = chart[0]
-    topSong2 = chart[1]
-    topSong3 = chart[2]
-    topSong4 = chart[3]
-    topSong5 = chart[4]
+    topSong1 = str(chart[0])
+    topSong2 = str(chart[1])
+    topSong3 = str(chart[2])
+    topSong4 = str(chart[3])
+    topSong5 = str(chart[4])
     print("Done listing songs.")
 
     def about():
-        messagebox.showinfo("About billpy", "billpy is a wrapper for billboard.py. This is a demo GUI version based on Tkinter. v 1.0")
+        messagebox.showinfo("About tkbillboard.py", "tkbillboard.py is a wrapper for billboard.py. This is a demo GUI version based on Tkinter. v 1.0")
 
     def refresh():
         import sys
         from os import execl
         from sys import executable
-        from os.path import abspath
         from sys import argv
         sys.stdout.flush()
         execl(executable, abspath(__file__), *argv) 
@@ -48,6 +47,7 @@ def app():
                 updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 exeupdate = Thread(target=updater.updateNow())
                 exeupdate.start()
+                updateprogressBox.mainloop()
             except Exception as e:
                 logDump(e)
                 exit()
@@ -66,19 +66,24 @@ def app():
             global topSong3
             global topSong4
             global topSong5
-            chart2 = billboard.ChartData("hot-100", date)
-            topSong1 = str(chart2[0])
-            topSong2 = str(chart2[1])
-            topSong3 = str(chart2[2])
-            topSong4 = str(chart2[3])
-            topSong5 = str(chart2[4])
-            message = "Chart of "+date+":\n"+"1. "+topSong1+"\n"+"2. "+topSong2+"\n"+"3. "+topSong3+"\n"+"4. "+topSong4+"\n"+"5. "+topSong5
-            messagebox.showinfo("Chart on specific date", message)
-            print("Done listing songs according to selected date.")
+            try:
+                chart2 = billboard.ChartData("hot-100", date)
+                topSong1 = str(chart2[0])
+                topSong2 = str(chart2[1])
+                topSong3 = str(chart2[2])
+                topSong4 = str(chart2[3])
+                topSong5 = str(chart2[4])
+                message = "Chart of "+date+":\n"+"1. "+topSong1+"\n"+"2. "+topSong2+"\n"+"3. "+topSong3+"\n"+"4. "+topSong4+"\n"+"5. "+topSong5
+                messagebox.showinfo("Chart on specific date", message)
+                print("Done listing songs according to selected date.")
+            except:
+                messagebox.showerror("Out of range date", "Check your dates again.")
         enterDateBox = Toplevel(billpy_window)
         enterDateBox.title("Custom date entry")
+        enterDateBox.focus_set()
         enterDate_msg = Label(enterDateBox, text="Enter the date below (YYYY-MM-DD):", font=("Segoe UI", 10))
         enterDate_entry = Entry(enterDateBox)
+        enterDate_entry.focus_set()
         enterDate_confirm = Button(enterDateBox, text="OK", command=lambda: displayDialogCustomDate(enterDate_entry.get()))
         enterDate_cancel = Button(enterDateBox, text="Cancel", command=lambda: enterDateBox.destroy())
         enterDate_msg.pack()
@@ -86,46 +91,76 @@ def app():
         enterDate_confirm.pack()
         enterDate_cancel.pack()
         enterDateBox.mainloop()
+
+    def getTokenSpotify():
+        try:
+            from spotipy import oauth2
+            from os.path import abspath
+            clientid_app = "fd0faa7123584102b5893a4639ff7288"
+            clientsecret_app = "347e543d63a94921b2455a26f0320481"
+            redirecturi_app = "localhost"
+            scope_app = "playlist-modify-private"
+            authSpotify = oauth2.SpotifyOAuth(client_id=clientid_app, client_secret=clientsecret_app, redirect_uri=redirecturi_app, scope=scope_app, cache_path=abspath(__file__))
+            print(authSpotify.get_authorise_url())
+            print("ok")
+        except:
+            messagebox.showerror("Failed log in", "tkbillboard cannot log in to Spotify[R] at the moment.")
+    def spotifyAddSongs():
+        print("?")
+    def getSpotifyLinks():
+        from spotipy import oauth2
+        from spotipy import Spotify
+        cached_token = str("")
     
     from tkinter import Label
     from tkinter.ttk import Button
     from tkinter import Toplevel
     from tkinter.ttk import Entry
     from tkinter.ttk import Progressbar
+    import webbrowser
+    from tkinter import Menu
     from tkinter import Tk
 
     billpy_window = Tk()
-    billpy_window.title("billpy GUI")
+    billpy_window.title("tkbillboard.py")
+    billpy_window.wm_resizable(False, False)
+    billpy_window["bg"] = "white"
 
-    topSong1_label = Label(billpy_window, text=topSong1, font=("Segoe UI", 14))
-    topSong1_label.pack()
+    menubar = Menu(billpy_window)
+    actionmenu = Menu(menubar, tearoff=0)
+    actionmenu.add_command(label="Refresh charts...", command=refresh)
+    actionmenu.add_command(label="See chart of custom date...", command=customDate)
+    actionmenu.add_command(label="Add songs to Spotify[R]... (not yet working)")
+    actionmenu.add_separator()
+    actionmenu.add_command(label="Update/Reinstall...", command=update)
+    menubar.add_cascade(label="Actions", menu=actionmenu)
+    helpmenu = Menu(menubar, tearoff=0)
+    helpmenu.add_command(label="About tkbillboard.py...", command=about)
+    helpmenu.add_separator()
+    helpmenu.add_command(label="Send feedback to developer...", command=lambda: webbrowser.open("mailto:?to=vietbetatester@outlook.com&subject=Problem with FileSyncer3"))
+    menubar.add_cascade(label="Help", menu=helpmenu)
 
-    topSong2_label = Label(billpy_window, text=topSong2, font=("Segoe UI", 14))
-    topSong2_label.pack()
+    topSong1_label = Label(billpy_window, text="1. "+topSong1, font=("Segoe UI", 14))
+    topSong1_label["bg"] = "white"
+    topSong1_label.pack(anchor="nw")
 
-    topSong3_label = Label(billpy_window, text=topSong3, font=("Segoe UI", 14))
-    topSong3_label.pack()
+    topSong2_label = Label(billpy_window, text="2. "+topSong2, font=("Segoe UI", 14))
+    topSong2_label["bg"] = "white"
+    topSong2_label.pack(anchor="nw")
 
-    topSong4_label = Label(billpy_window, text=topSong4, font=("Segoe UI", 14))
-    topSong4_label.pack()
+    topSong3_label = Label(billpy_window, text="3. "+topSong3, font=("Segoe UI", 14))
+    topSong3_label["bg"] = "white"
+    topSong3_label.pack(anchor="nw")
 
-    topSong5_label = Label(billpy_window, text=topSong5, font=("Segoe UI", 14))
-    topSong5_label.pack()
+    topSong4_label = Label(billpy_window, text="4. "+topSong4, font=("Segoe UI", 14))
+    topSong4_label["bg"] = "white"
+    topSong4_label.pack(anchor="nw")
 
-    refresh_button = Button(billpy_window, text="Refresh charts", command=refresh)
-    refresh_button.pack()
+    topSong5_label = Label(billpy_window, text="5. "+topSong5, font=("Segoe UI", 14))
+    topSong5_label["bg"] = "white"
+    topSong5_label.pack(anchor="nw")
 
-    spotify_button = Button(billpy_window, text="Add songs to Spotify[R] (not implimented)")
-    spotify_button.pack()
-
-    customdate_button = Button(billpy_window, text="See chart on specific date", command=customDate)
-    customdate_button.pack()
-
-    about_button = Button(billpy_window, text="About", command=about)
-    about_button.pack()
-
-    update_button = Button(billpy_window, text="Update/Reinstall", command=update)
-    update_button.pack()
+    billpy_window.config(menu=menubar)
 
     billpy_window.mainloop()
     print("Exitting application.")
