@@ -49,26 +49,39 @@ def app():
             messagebox.showinfo("Update was cancelled!", "The update process was denied.")
 
     def customDate():
-
-        parsed_date = date.replace("")
-        print("Start listing songs according to selected date.")
-        global topSong1
-        global topSong2
-        global topSong3
-        global topSong4
-        global topSong5
-        chart2 = billboard.ChartData("hot-100", parsed_date)
-        topSong1 = chart2[0]
-        topSong2 = chart2[1]
-        topSong3 = chart2[2]
-        topSong4 = chart2[3]
-        topSong5 = chart2[4]
-        message = "1. "+topSong1+"\n"+"2. "+topSong2+"\n"+"3. "+topSong3+"\n"+"4. "+topSong4+"\n"+"5. "+topSong5
-        messagebox.showinfo("Chart on specific date", message)
-        print("Done listing songs according to selected date.")
+        def displayDialogCustomDate(date):
+            enterDateBox.destroy()
+            print("Start listing songs according to selected date.")
+            global topSong1
+            global topSong2
+            global topSong3
+            global topSong4
+            global topSong5
+            chart2 = billboard.ChartData("hot-100", date)
+            topSong1 = str(chart2[0])
+            topSong2 = str(chart2[1])
+            topSong3 = str(chart2[2])
+            topSong4 = str(chart2[3])
+            topSong5 = str(chart2[4])
+            message = "Chart of "+date+":\n"+"1. "+topSong1+"\n"+"2. "+topSong2+"\n"+"3. "+topSong3+"\n"+"4. "+topSong4+"\n"+"5. "+topSong5
+            messagebox.showinfo("Chart on specific date", message)
+            print("Done listing songs according to selected date.")
+        enterDateBox = Toplevel(billpy_window)
+        enterDateBox.title("Custom date entry")
+        enterDate_msg = Label(enterDateBox, text="Enter the date below (YYYY-MM-DD):", font=("Segoe UI", 10))
+        enterDate_entry = Entry(enterDateBox)
+        enterDate_confirm = Button(enterDateBox, text="OK", command=lambda: displayDialogCustomDate(enterDate_entry.get()))
+        enterDate_cancel = Button(enterDateBox, text="Cancel", command=lambda: enterDateBox.destroy())
+        enterDate_msg.pack()
+        enterDate_entry.pack()
+        enterDate_confirm.pack()
+        enterDate_cancel.pack()
+        enterDateBox.mainloop()
     
     from tkinter import Label
     from tkinter.ttk import Button
+    from tkinter import Toplevel
+    from tkinter.ttk import Entry
     from tkinter import Tk
 
     billpy_window = Tk()
@@ -95,7 +108,7 @@ def app():
     spotify_button = Button(billpy_window, text="Add songs to Spotify[R] (not implimented)")
     spotify_button.pack()
 
-    customdate_button = Button(billpy_window, text="See chart on specific date (not implimented)")
+    customdate_button = Button(billpy_window, text="See chart on specific date", command=customDate)
     customdate_button.pack()
 
     about_button = Button(billpy_window, text="About", command=about)
