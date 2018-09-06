@@ -44,13 +44,14 @@ def app():
                 updateprogress_bar = Progressbar(updateprogressBox, orient="horizontal", length=200, mode="indeterminate")
                 updateprogress_label.pack()
                 updateprogress_bar.pack()
-                updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
-                Thread.run(updater.updateNow())
                 updateprogressBox.mainloop()
-                updateprogressBox.destroy()
+                updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
+                exeupdate = Thread(target=updater.updateNow())
+                exeupdate.start()
             except Exception as e:
                 logDump(e)
                 exit()
+            updateprogressBox.destroy()
             messagebox.showinfo("Update was successful!", "The update process succeeded! Please click 'OK' to launch the new version.")
             refresh()
         elif confirmUpdate == "no":
