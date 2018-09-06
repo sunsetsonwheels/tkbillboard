@@ -38,8 +38,16 @@ def app():
                 import updater
                 from os.path import dirname
                 from os.path import realpath
+                from threading import Thread
+                updateprogressBox = Toplevel(billpy_window)
+                updateprogress_label = Label(updateprogressBox, text="Updating/Reinstalling the app, please wait...", font=("Segoe UI", 10))
+                updateprogress_bar = Progressbar(updateprogressBox, orient="horizontal", length=200, mode="indeterminate")
+                updateprogress_label.pack()
+                updateprogress_bar.pack()
                 updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
-                updater.updateNow()
+                Thread.run(updater.updateNow())
+                updateprogressBox.mainloop()
+                updateprogressBox.destroy()
             except Exception as e:
                 logDump(e)
                 exit()
@@ -82,6 +90,7 @@ def app():
     from tkinter.ttk import Button
     from tkinter import Toplevel
     from tkinter.ttk import Entry
+    from tkinter.ttk import Progressbar
     from tkinter import Tk
 
     billpy_window = Tk()
