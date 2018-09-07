@@ -20,7 +20,7 @@ def app():
         win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
 
     def about():
-        messagebox.showinfo("About tkbillboard.py", "tkbillboard.py is a wrapper for billboard.py. This is a demo GUI version based on Tkinter. v 1.0")
+        messagebox.showinfo("About tkbillboard.py", "tkbillboard.py is a wrapper for billboard.py. This is a demo GUI version based on Tkinter. v 2.0")
 
     def refresh():
         sys.stdout.flush()
@@ -28,9 +28,9 @@ def app():
     
     def update():
         confirmUpdate = messagebox.askquestion("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is! If not, click No!", icon="warning")
+        chart_date.set("Updating app...")
         if confirmUpdate == "yes": 
             try:
-                chart_date.set("Updating app...")
                 import updater
                 updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 updater.updateNow()
@@ -41,6 +41,9 @@ def app():
                 logDump(e)
                 exit()
         elif confirmUpdate == "no":
+            date_object = datetime.now()
+            formatted_date = "Chart data date: "+date_object.strftime('%Y-%m-%d')
+            chart_date.set(formatted_date)
             messagebox.showinfo("Update was cancelled!", "The update process was denied.")
 
     def customDate():
