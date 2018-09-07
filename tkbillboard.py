@@ -27,13 +27,14 @@ def app():
         execl(executable, abspath(__file__), *argv) 
     
     def update():
-        confirmUpdate = messagebox.askquestion("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is! If not, click No!", icon="warning")
         chart_date.set("Updating app...")
+        confirmUpdate = messagebox.askquestion("We're deleting everything in the billpy folder", "Make sure billpy is in its own folder, because updating will DELETE everything inside the folder where billpy is! If not, click No!", icon="warning")
         if confirmUpdate == "yes": 
             try:
                 import updater
                 updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 updater.updateNow()
+                global chart_date
                 chart_date("App restart required.")
                 messagebox.showinfo("Update was successful!", "The update process succeeded! Please click 'OK' to launch the new version.")
                 refresh()
