@@ -112,6 +112,7 @@ def app():
     billpy_window = Tk()
     billpy_window.title("tkbillboard.py")
     billpy_window.wm_resizable(False, False)
+    billpy_window.focus_set()
     billpy_window["bg"] = "white"
 
     menubar = Menu(billpy_window)
