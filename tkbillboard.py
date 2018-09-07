@@ -44,7 +44,6 @@ def app():
             date_object = datetime.now()
             formatted_date = "Chart data date: "+date_object.strftime('%Y-%m-%d')
             chart_date.set(formatted_date)
-            messagebox.showinfo("Update was cancelled!", "The update process was denied.")
 
     def customDate():
         def displayCustomDate(date):
