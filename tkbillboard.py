@@ -34,8 +34,7 @@ def app():
                 import updater
                 updater.configureConfigNow("me.jkelol111.tkbillboardpy", "https://github.com/jkelol111/tkbillboard.py.git", dirname(realpath(__file__)), "billpy.py", True, False)
                 updater.updateNow()
-                global chart_date
-                chart_date("App restart required.")
+                chart_date.set("App restart required.")
                 messagebox.showinfo("Update was successful!", "The update process succeeded! Please click 'OK' to launch the new version.")
                 refresh()
             except Exception as e:
