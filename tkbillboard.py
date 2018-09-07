@@ -92,8 +92,8 @@ def app():
         enterDateBox.mainloop()
     
     from tkinter import Label
-    from tkinter.ttk import Button
     from tkinter import Toplevel
+    from tkinter.ttk import Button
     from tkinter.ttk import Entry
     from tkinter.ttk import Progressbar
     from tkinter import StringVar
@@ -102,7 +102,6 @@ def app():
     from tkinter import Tk
     from os.path import dirname
     from os.path import realpath
-    from threading import Thread
     import sys
     from os import execl
     from sys import executable
