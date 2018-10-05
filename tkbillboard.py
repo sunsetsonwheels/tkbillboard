@@ -81,6 +81,7 @@ def app():
         enterDate_entry = Entry(enterDateBox)
         enterDate_entry.focus_set()
         enterDate_confirm = Button(enterDateBox, text="OK", command=lambda: displayCustomDate(enterDate_entry.get()))
+        enterDate_confirm.bind("<Return>", lambda: displayCustomDate(enterDate_entry.get()))
         enterDate_cancel = Button(enterDateBox, text="Cancel", command=cancelDialog)
         enterDate_msg.pack()
         enterDate_entry.pack()
@@ -116,7 +117,7 @@ def app():
 
     menubar = Menu(billpy_window)
     actionmenu = Menu(menubar, tearoff=0)
-    actionmenu.add_command(label="Refresh charts...", command=refresh)
+    actionmenu.add_command(label="Refresh charts/Warp back to present...", command=refresh)
     actionmenu.add_command(label="See chart of custom date...", command=customDate)
     actionmenu.add_separator()
     actionmenu.add_command(label="Update/Reinstall...", command=update)
