@@ -65,7 +65,7 @@ def app():
                 print("Done listing songs from: "+date+".")
             except Exception as e:
                 logDump(e)
-                messagebox.showerror("Out of range date", "Check your dates again.")
+                messagebox.showerror("Out of range date", "Check your dates again. It could be due to:\n-Date too long in the past (before BillBoard charts existed)\-")
 
         def cancelDialog():
             enterDateBox.destroy()
