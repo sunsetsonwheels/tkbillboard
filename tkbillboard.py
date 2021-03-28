@@ -113,7 +113,6 @@ def app():
     billpy_window.title("tkbillboard.py")
     billpy_window.wm_resizable(False, False)
     billpy_window.focus_set()
-    billpy_window["bg"] = "white"
 
     menubar = Menu(billpy_window)
     actionmenu = Menu(menubar, tearoff=0)
@@ -151,28 +150,22 @@ def app():
     formatted_date = "Chart data date: "+date_object.strftime('%Y-%m-%d')
     chart_date.set(formatted_date)
 
-    topSong1_label = Label(billpy_window, textvariable=topSong1, font=("Segoe UI", 14))
-    topSong1_label["bg"] = "white"
+    topSong1_label = Label(billpy_window, textvariable=topSong1)
     topSong1_label.pack(anchor="nw")
 
-    topSong2_label = Label(billpy_window, textvariable=topSong2, font=("Segoe UI", 14))
-    topSong2_label["bg"] = "white"
+    topSong2_label = Label(billpy_window, textvariable=topSong2)
     topSong2_label.pack(anchor="nw")
 
-    topSong3_label = Label(billpy_window, textvariable=topSong3, font=("Segoe UI", 14))
-    topSong3_label["bg"] = "white"
+    topSong3_label = Label(billpy_window, textvariable=topSong3)
     topSong3_label.pack(anchor="nw")
 
-    topSong4_label = Label(billpy_window, textvariable=topSong4, font=("Segoe UI", 14))
-    topSong4_label["bg"] = "white"
+    topSong4_label = Label(billpy_window, textvariable=topSong4)
     topSong4_label.pack(anchor="nw")
 
-    topSong5_label = Label(billpy_window, textvariable=topSong5, font=("Segoe UI", 14))
-    topSong5_label["bg"] = "white"
+    topSong5_label = Label(billpy_window, textvariable=topSong5)
     topSong5_label.pack(anchor="nw")
 
-    chart_date_label = Label(billpy_window, textvariable=chart_date, font=("Segoe UI Bold", 8))
-    chart_date_label["bg"] = "white"
+    chart_date_label = Label(billpy_window, textvariable=chart_date)
     chart_date_label.pack(anchor="nw")
 
     billpy_window.config(menu=menubar)
